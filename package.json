@@ -1,0 +1,27 @@
+{
+  "name": "rag-pdf",
+  "version": "1.0.0",
+  "main": "server/index.ts",
+  "scripts": {
+    "install": "npm install --prefix client && npm install --prefix server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run start --prefix server\"",
+    "start": "npm run build --prefix client && npm run start --prefix server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabricioGuac/RAG-PDF.git"
+  },
+  "keywords": [],
+  "author": "Fabricio Guacuto",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "dotenv": "^17.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/fabricioGuac/RAG-PDF/issues"
+  },
+  "homepage": "https://github.com/fabricioGuac/RAG-PDF#readme",
+  "description": ""
+}
