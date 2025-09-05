@@ -4,12 +4,16 @@
   "description": "Server for a RAG application to upload, store, and query PDFs data in a seamless manner with chat like interactions.",
   "main": "index.ts",
   "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "Node",
     "MongoDB",
     "Express",
+    "Qdrant",
     "RAG",
     "AI",
     "PDF"
@@ -17,7 +21,9 @@
   "author": "Fabricio Guacuto",
   "license": "MIT",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.882.0",
     "@langchain/openai": "^0.6.11",
+    "@qdrant/js-client-rest": "^1.15.1",
     "aws-sdk": "^2.1692.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
