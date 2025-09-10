@@ -1,11 +1,10 @@
+import { Outlet } from 'react-router-dom';
 
-function App() {
+export default function App() {
 
   return (
-    <div className="text-3xl text-blue-600 font-bold underline text-center mt-10">
-      Tailwind is working!
-    </div>
+    <>
+      <Outlet />
+    </>
   )
 }
-
-export default App

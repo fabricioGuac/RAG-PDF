@@ -13,7 +13,7 @@ if (!admin.apps.length){
             clientEmail: env.FIREBASE_CLIENT_EMAIL,
             privateKey: firebasePrivateKey,
         }),
-        storageBucket:`${env.FIREBASE_PROJECT_ID}.appspot.com`
+        storageBucket:`${env.FIREBASE_PROJECT_ID}.firebasestorage.app`
     });
 }
 
