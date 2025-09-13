@@ -1,13 +1,16 @@
 import { Router } from "express";
-import { verifyAuth, AuthRequest } from "../middlewares/auth.middleware";
+import { verifyAuth } from "../middlewares/auth.middleware";
+import { pdfRoutes } from './pdfRoutes';
+// import { queryRoutes } from './queryRoutes';
+
 
 const router = Router();
 
-router.get("/protected", verifyAuth, (req: AuthRequest, res) => {
-    res.json({
-        message: "YOU HAVE ACCESSSS!!!",
-        uid: req.user?.uid,
-    });
+router.get("/status", (_req, res) => {
+    res.json({ message: "Server is running 🚀" });
 });
+
+router.use('/pdf',verifyAuth, pdfRoutes);
+// router.use('/query',verifyAuth, queryRoutes);
 
 export default router;

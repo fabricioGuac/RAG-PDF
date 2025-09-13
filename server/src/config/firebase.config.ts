@@ -1,4 +1,5 @@
 import admin from "firebase-admin";
+import { getFirestore } from "firebase-admin/firestore";
 import { env } from "./env";
 
 // Ensure private key line breaks are correctly parsed
@@ -19,5 +20,5 @@ if (!admin.apps.length){
 
 // Export the firebase services to implemented
 export const auth = admin.auth(); 
-export const firestore = admin.firestore();
+export const firestore = getFirestore('default');
 export const storage = admin.storage().bucket();

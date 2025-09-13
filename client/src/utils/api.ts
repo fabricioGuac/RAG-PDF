@@ -1,12 +1,17 @@
 import { auth } from "../firebase/config";
+import { onAuthStateChanged } from "firebase/auth";
 
 const API_BASE_URL = "http://localhost:5000";
 
 // Retrieve ID token to send to backend
 const getToken = async (): Promise<string> => {
-    const user = auth.currentUser;
-    if(!user) throw new Error("Not authenticated");
-    return await user.getIdToken();
+    return new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            unsubscribe(); // stop listening
+            if (!user) return reject(new Error("Not authenticated"));
+            resolve(await user.getIdToken());
+        });
+    });
 };
 
 interface FetchOptions extends RequestInit {
@@ -39,6 +44,7 @@ const fetchApi = async <T = any>(url: string, options: FetchOptions = {}): Promi
     // Throws an error if the response status is not OK
     if(!response.ok) {
         const text = await response.text();
+        console.error(response);
         throw new Error(`HTTP error! status: ${response.status}. Message: ${text}`);
     }
     // Parses and return the response as JSON

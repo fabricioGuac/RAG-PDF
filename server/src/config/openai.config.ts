@@ -1,4 +1,4 @@
-import { OpenAI } from "@langchain/openai";
+import  OpenAI  from "openai";
 import { env } from "./env";
 
 // Initialize the OpenAi client

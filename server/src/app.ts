@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 // API routes
-app.use(routes);
+app.use("/api", routes);
 
 // Serve frontend in porduction
 if (env.NODE_ENV === "production") {
