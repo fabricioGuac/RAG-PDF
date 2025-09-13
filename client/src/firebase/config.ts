@@ -1,5 +1,5 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, setPersistence, browserLocalPersistence } from "firebase/auth";
 
 // Hardcoded firebase configuration (public info, safe to commit)
 const firebaseConfig = {
@@ -17,3 +17,8 @@ const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
 // Export concrete instances so callers don't worry about init timing
 export const auth = getAuth(app);
+
+// Make sessions persist
+setPersistence(auth, browserLocalPersistence)
+.then(() => console.log("Firebase auth persistance: Local"))
+.catch(console.error);

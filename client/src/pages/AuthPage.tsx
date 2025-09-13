@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 
@@ -13,9 +13,10 @@ export default function AuthPage() {
 
     // Redirects the user to the dashboard if logged in
     useEffect(() => {
-        if (auth.currentUser) {
-            navigate('/');
-        }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) navigate("/"); // redirect if logged in
+    });
+    return () => unsubscribe(); // cleanup
     }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -28,8 +29,7 @@ export default function AuthPage() {
             } else {
                 await signInWithEmailAndPassword(auth, email, password);
             }
-            // After the user is logged in redirect to dashboard
-            navigate('/');
+            // Navigate will be handled by onAuthStateChanged
         } catch (error: any) {
             setErrorMessage(error.message);
         }
