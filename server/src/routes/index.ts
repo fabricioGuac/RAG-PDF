@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { verifyAuth } from "../middlewares/auth.middleware";
 import { pdfRoutes } from './pdfRoutes';
-// import { queryRoutes } from './queryRoutes';
+import { queryRoutes } from './queryRoutes';
 
 
 const router = Router();
@@ -11,6 +11,6 @@ router.get("/status", (_req, res) => {
 });
 
 router.use('/pdf',verifyAuth, pdfRoutes);
-// router.use('/query',verifyAuth, queryRoutes);
+router.use('/query',verifyAuth, queryRoutes);
 
 export default router;

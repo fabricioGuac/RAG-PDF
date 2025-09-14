@@ -53,7 +53,7 @@ export const embeddingService = {
                 rawChunks.push({
                     id: uuidv4(),
                     text: chunkText,
-                    payload: { userId, pdfId, pageIndex, chunkIndex: i },
+                    payload: { userId, pdfId, pageIndex, chunkIndex: i, text: chunkText },
                 });
             }
         }
