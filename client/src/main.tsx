@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         path: '/chat',
         element: 
         <ProtectedRoute>
-          < PdfChatPage />
+          < PdfChatPage storagePath={''} pdfId={''} />
         </ProtectedRoute>
       },
     ]

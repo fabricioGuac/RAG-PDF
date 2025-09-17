@@ -20,5 +20,5 @@ if (!admin.apps.length){
 
 // Export the firebase services to implemented
 export const auth = admin.auth(); 
-export const firestore = getFirestore('default');
+export const firestore = getFirestore();
 export const storage = admin.storage().bucket();
