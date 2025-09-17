@@ -29,13 +29,13 @@ export default function PdfViewerComponent({ storagePath }: PdfViewerComponentPr
         fetchUrl();
     }, [storagePath]);
 
-    // Zoom controls
+    // Zoom controls (limits to 3 and 0.5 so that TextLayer does not break)
     const zoomIn = () => setScale((s) => Math.min(s + 0.2, 3));
     const zoomOut = () => setScale((s) => Math.max(s - 0.2, 0.5));
     const resetZoom = () => setScale(1.0);
 
     return (
-        <div className="flex-1  max-h-screen overflow-auto  border-b md:border-r flex min-w-0 flex-col">
+        <div className="flex-1 max-h-screen flex flex-col border-b md:border-r min-w-0">
             {/* Zoom controls */}
             <div className="flex items-center justify-center gap-2 p-2 border-b bg-gray-50">
                 <button onClick={zoomOut} className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">-</button>
@@ -44,9 +44,9 @@ export default function PdfViewerComponent({ storagePath }: PdfViewerComponentPr
                 <button onClick={resetZoom} className="ml-2 px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">Reset</button>
             </div>
 
-            {/* PDF display area */}
-            <div className="flex-1 overflow-auto bg-gray-100">
-                <div className="flex justify-center w-full h-full overflow-auto">
+            {/* PDF container */}
+            <div className="flex-1 relative overflow-auto bg-gray-100">
+                <div className="absolute top-0 left-18 w-max h-max flex justify-center">
                     {!pdfUrl ? (
                         <p className="text-gray-500 m-auto">Loading PDF...</p>
                     ) : (
