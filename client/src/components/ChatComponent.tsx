@@ -11,8 +11,10 @@ interface ChatMessage {
     role: "user" | "assistant" | "error";
 }
 
+
 export default function ChatComponent({ pdfId }: ChatComponentProps) {
     const [chat, setChat] = useState<ChatMessage[]>([]);
+
     const [question, setQuestion] = useState("");
     const [loading, setLoading] = useState(false);
     const chatEndRef = useRef<HTMLDivElement | null>(null);
@@ -60,8 +62,8 @@ export default function ChatComponent({ pdfId }: ChatComponentProps) {
     };
 
     return (
-        <div className="flex-1 flex flex-col min-w-0 border-l">
-            {/* Chat history */}
+        <div className="flex flex-col h-full">
+        {/* Chat history */}
             <div className="flex-1 overflow-y-auto p-4 space-y-2 bg-gray-50">
                 {chat.map((msg) => (
                     <div

@@ -35,7 +35,8 @@ export default function PdfViewerComponent({ storagePath }: PdfViewerComponentPr
     const resetZoom = () => setScale(1.0);
 
     return (
-        <div className="flex-1 max-h-screen flex flex-col border-b md:border-r min-w-0">
+        <div className="flex flex-col h-full ">
+
             {/* Zoom controls */}
             <div className="flex items-center justify-center gap-2 p-2 border-b bg-gray-50">
                 <button onClick={zoomOut} className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">-</button>

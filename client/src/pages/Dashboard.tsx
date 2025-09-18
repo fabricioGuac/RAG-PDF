@@ -17,9 +17,13 @@ export default function Dashboard() {
             />
             {/* Main content (reader and chat) */}
             {selectedPdf ? (
-                <div className="flex-1 flex flex-col lg:flex-row">
-                    <PdfViewerComponent storagePath={selectedPdf.storagePath} />
-                    <ChatComponent pdfId={selectedPdf.pdfId} />
+                <div className="flex-1 flex flex-col lg:flex-row max-h-screen">
+                    <div className="flex-1 min-h-0 border-b lg:border-b-0 lg:border-r"> {/* ensures PdfViewer shrinks properly */}
+                        <PdfViewerComponent storagePath={selectedPdf.storagePath} />
+                    </div>
+                    <div className="flex-1 min-h-0 border-t lg:border-t-0 lg:border-l"> {/* ensures Chat shrinks properly */}
+                        <ChatComponent pdfId={selectedPdf.pdfId} />
+                    </div>
                 </div>
             ) : (
                 <div className="flex-1 flex items-center justify-center text-gray-400">
