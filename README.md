@@ -4,29 +4,61 @@
 
 RAG PDF is an AI powered PDF assistant that allows users to upload PDFs and interact with their contents through natural chats.
 
-The app leverages:
+The app leverages a modern stack chosen for speed of development, scalability, and ease of deployment:
 
-* Firebase Authentication for user accounts
+* Firebase → Quick, reliable user authentication with minimal boilerplate.
 
-* Firestore for storing PDF metadata
+* Firestore → Stores PDF metadata.
 
-* Firebase Storage for storing the uploaded PDFs
+* Firebase Storage → Seamless file storage for uploaded PDFs.
 
-* Qdrant as a vector database for embeddings
+* Qdrant → Specialized vector database, ideal for scalable semantic search and comes with a generous free tier.
 
-* OpenAI API for embedding generation and querying
+* OpenAI API → High-quality embeddings and chat completions.
 
-The frontend is a React + TypeScript + Vite application, and the backend is an Express + TypeScript server. The backend is deployed on Render, while the client is deployed on Vercel.
+* Backend: Express + Typescript, deployed on *Render* for simplicity and stability
+
+* Frontend: React + Typescript + Vite deployed on *Vercel*
 
 ## Instalation
 
-No installation needed; the app is deployed. For local development, clone the repo, create a .env with values for the variables inside server/config/env.ts, run: 
+The app is deployed and ready to use. For local development:
 
+1. Clone the repository
+``` bash
+git clone git@github.com:fabricioGuac/RAG-PDF.git
+
+cd RAG-PDF
 ```
-# Install dependencies for server and client
+
+2. Intall dependencies
+``` bash
+
 npm install
 
-# Start both server and client locally
+```
+
+3. Set enviroment variables
+    Create a .env file (see server/config/env.ts for required variables) and add your keys for: 
+
+    * OpenAI
+    * Firebase
+    * Qdrant (if not using Docker locally)
+
+4. Run Qdrant locally with Docker (if not using a cloud instance)
+
+``` bash
+
+docker pull qdrant/qdrant
+
+docker run -p 6333:6333 -p 6334:6334 \
+  -v "$(pwd)/qdrant_storage:/qdrant/storage:z" \
+  qdrant/qdrant
+
+```
+5. Start the project locally
+
+```
 npm run dev
 
 ```
