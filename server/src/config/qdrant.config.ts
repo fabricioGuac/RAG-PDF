@@ -1,13 +1,14 @@
 import { QdrantClient } from "@qdrant/js-client-rest";
 import { env } from "./env";
 
+
 export const qdrantClient = new QdrantClient(
     env.NODE_ENV === "production" ?
         { url: env.QDRANT_URL, apiKey: env.QDRANT_API_KEY } :
         { host: "localhost", port: 6333 } // Local development 
 );
 
-// Initialize the collection if missing
+
 export async function ensurePdfChunksCollection() {
     const collectionName = "pdf_chunks";
 
@@ -25,4 +26,15 @@ export async function ensurePdfChunksCollection() {
     } else {
         console.log(`Collection '${collectionName}' already exists.`);
     }
+
+    // Always ensure indexes for filterable fields
+    await qdrantClient.createPayloadIndex(collectionName, {
+        field_name: "userId",
+        field_schema: "keyword",
+    });
+
+    await qdrantClient.createPayloadIndex(collectionName, {
+        field_name: "pdfId",
+        field_schema: "keyword",
+    });
 }

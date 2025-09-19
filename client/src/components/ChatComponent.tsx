@@ -24,6 +24,11 @@ export default function ChatComponent({ pdfId }: ChatComponentProps) {
         chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [chat]);
 
+    // Clean the chat on PDF change
+    useEffect(() => {
+        setChat([]);
+    }, [pdfId]);
+
     const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!question.trim()) return;

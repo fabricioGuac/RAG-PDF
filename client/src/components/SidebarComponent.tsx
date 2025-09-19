@@ -14,6 +14,7 @@ export default function SidebarComponent({ setSelectedPdf }: SidebarComponentPro
     const [pdfs, setPdfs] = useState<PdfMetadata[]>([]);
     const [pdf, setPdf] = useState<File | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
+    const [uploading, setUpoading] = useState<boolean>(false);
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
     // Reference for the PDF input
     const pdfInputRef = useRef<HTMLInputElement | null>(null);
@@ -66,6 +67,7 @@ export default function SidebarComponent({ setSelectedPdf }: SidebarComponentPro
         formData.append("file", pdf);
 
         try {
+            setUpoading(true);
             const newPdf = await post<{ message: string, pdfMetadata: { userId: string, pdfId: string, name: string, storagePath: string } }>("/api/pdf/upload", formData);
             setPdfs((prev) => [...prev, newPdf.pdfMetadata]); // Add the new pdf metadata to the array
             // Reset input after successful upload
@@ -73,6 +75,8 @@ export default function SidebarComponent({ setSelectedPdf }: SidebarComponentPro
             if (pdfInputRef.current) pdfInputRef.current.value = "";
         } catch (e) {
             console.error(e instanceof Error ? e.message : "Unknown error");
+        } finally {
+            setUpoading(false);
         }
     };
 
@@ -102,7 +106,7 @@ export default function SidebarComponent({ setSelectedPdf }: SidebarComponentPro
                     <h2 className="font-semibold text-lg">My PDFs</h2>
                     <button
                         onClick={() => setSidebarOpen(false)}
-                        className="text-gray-500 hover:text-gray-700 lg:hidden"
+                        className="text-gray-500 cursor-pointer hover:text-gray-700 lg:hidden"
                     >
                         ✕
                     </button>
@@ -114,7 +118,7 @@ export default function SidebarComponent({ setSelectedPdf }: SidebarComponentPro
                     className="p-4 border-b flex flex-col items-center gap-3"
                 >
                     <label className="flex items-center justify-center gap-2 cursor-pointer text-sm text-gray-700 border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 bg-gray-50 w-full text-center">
-                        <span>{pdf ? "Change File" : "Upload a PDF here"}</span>
+                        <span>{uploading ? "UPLOADING..." : pdf ? "Change File" : "Upload a PDF here"}</span>
                         <input
                             type="file"
                             ref={pdfInputRef}
