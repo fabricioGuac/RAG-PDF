@@ -7,7 +7,6 @@ import App from './App.tsx';
 import AuthPage from './pages/AuthPage.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import Dashboard from './pages/Dashboard.tsx';
-import PdfChatPage from './pages/PdfChatPage.tsx';
 
 // Defines the routes to wich the components will render
 const router = createBrowserRouter([
@@ -25,13 +24,6 @@ const router = createBrowserRouter([
       }, {
         path: '/auth',
         element: < AuthPage />
-      },
-      {
-        path: '/chat',
-        element: 
-        <ProtectedRoute>
-          < PdfChatPage storagePath={''} pdfId={''} />
-        </ProtectedRoute>
       },
     ]
   }

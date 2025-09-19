@@ -133,7 +133,7 @@ export default function SidebarComponent({ setSelectedPdf }: SidebarComponentPro
                             <span className="truncate">{pdf.name}</span>
                             <button
                                 type="submit"
-                                className="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-800"
+                                className="px-3 py-1 bg-blue-600 text-white cursor-pointer text-xs rounded hover:bg-blue-800"
                             >
                                 Upload
                             </button>
