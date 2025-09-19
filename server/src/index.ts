@@ -1,21 +1,14 @@
 import app from "./app";
-import { env } from "./config/env";
 import { ensurePdfChunksCollection } from "./config/qdrant.config";
 
-const PORT =  env.PORT;
-
-async function startServer() {
+(async () => {
     try {
-        // Ensures the Qdrant collection exists before staring the server
         await ensurePdfChunksCollection();
-        // Starts the Express server
-        app.listen(PORT,() => {
-            console.log(`🚀 Server running on port ${PORT}`);
-        });
+        console.log("✅ Qdrant collection ready");
     } catch (error) {
-        console.error(`Failed to start server ${error}`);
-        process.exit(1); // exit with error code
+        console.error("❌ Failed to initialize Qdrant collection", error);
     }
-}
+})();
 
-startServer();
+// Instead of starting a server, export the app for Vercel
+export default app;
