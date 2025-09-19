@@ -9,18 +9,22 @@ const app: Application = express();
 // Middleware to parse the url encoded, allow cors or json requests
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+    'http://localhost:5173', // local  dev
+    'https://rag-pdf-psi.vercel.app/' // deployed url
+];
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error(`Not allowed by CORS: ${origin}`));
+        }
+    }
+}));
+
 
 // API routes
 app.use("/api", routes);
-
-// Serve frontend in porduction
-if (env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../../client/dist")));
-
-    app.get("*", (_req, res) => {
-        res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
-    });
-}
 
 export default app;
