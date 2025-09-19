@@ -43,7 +43,7 @@ npm run dev
 
 ## Screenshot displaying the deployed app
 
-![chat with a pdf](./client/public/)
+![chat with a pdf](./client/public/vercel_client.png)
 
 ## URL to the deployed app
 
