@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const allowedOrigins = [
     'http://localhost:5173', // local  dev
-    'https://rag-pdf-psi.vercel.app/' // deployed url
+    'https://rag-pdf-psi.vercel.app' // deployed url
 ];
 app.use(cors({
     origin: (origin, callback) => {
