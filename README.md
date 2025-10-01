@@ -79,6 +79,8 @@ npm run dev
 
 ## URL to the deployed app
 
+*The project's Qdrant free tier DB was suspended, so it is not working at the moment.*  
+
 [Rag PDF deployed link](https://rag-pdf-psi.vercel.app/)
 
 ## License
